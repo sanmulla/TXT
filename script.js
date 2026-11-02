@@ -5,13 +5,20 @@ const letterbook = document.querySelector('#letterbook');
 const photoViewer = document.querySelector('#photoViewer');
 const viewerImage = document.querySelector('#viewerImage');
 const galleryPhotos = [...document.querySelectorAll('[data-photo] img')];
-const musicToggle = document.querySelector('#musicToggle');
 let activeIndex = 0;
 let turning = false;
 let heartTimer;
 let currentPhoto = 0;
-let audioContext;
-let musicMaster;
+let player;
+let playerReady = false;
+let currentTrack = 0;
+let playbackState = -1;
+const tracks = [
+  { id: 'lomg3JLjIQc', title: 'SOOBIN’s 숲', artist: 'SOOBIN · Original by Choi Yu Ree', url: 'https://www.youtube.com/watch?v=lomg3JLjIQc' },
+  { id: 'gf1p0ASBVNA', title: '나의 봄의 이유', artist: 'SOOBIN · Original by Paul Kim', url: 'https://www.youtube.com/watch?v=gf1p0ASBVNA' },
+  { id: 'Vd9QkWsd5p4', title: 'Blue Hour', artist: 'TOMORROW X TOGETHER', url: 'https://www.youtube.com/watch?v=Vd9QkWsd5p4' },
+  { id: '-_ZqOBB6dho', title: 'Our Summer', artist: 'TOMORROW X TOGETHER', url: 'https://www.youtube.com/watch?v=-_ZqOBB6dho' }
+];
 
 function makeHearts(amount = 8) {
   const layer = document.querySelector('#floatingHearts');
@@ -34,7 +41,7 @@ function updatePageNumber(index) {
 
 function showPageCelebration(index) {
   pages.forEach((page) => page.classList.remove('celebrate'));
-  if (index === 6) {
+  if (index === 7) {
     pages[index].classList.add('celebrate');
     makeHearts(16);
   } else if (index === 2) {
@@ -48,6 +55,7 @@ function turnTo(nextIndex, direction = 'next') {
   const current = pages[activeIndex];
   const next = pages[nextIndex];
   const forward = direction === 'next';
+  if (activeIndex === 5 && playerReady) player.pauseVideo();
   letterbook.classList.toggle('is-gallery', nextIndex === 3);
   current.classList.add(forward ? 'flip-out-next' : 'flip-out-prev');
   next.hidden = false;
@@ -123,43 +131,59 @@ document.querySelector('#viewerPrev').addEventListener('click', () => showPhoto(
 document.querySelector('#viewerNext').addEventListener('click', () => showPhoto(currentPhoto + 1));
 photoViewer.addEventListener('click', (event) => { if (event.target === photoViewer) closePhoto(); });
 
-function createMusic() {
-  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-  if (!AudioContextClass) return false;
-  if (!audioContext) {
-    audioContext = new AudioContextClass();
-    musicMaster = audioContext.createGain();
-    musicMaster.gain.value = 0;
-    musicMaster.connect(audioContext.destination);
-    [261.63, 329.63, 392].forEach((frequency, index) => {
-      const oscillator = audioContext.createOscillator();
-      const voice = audioContext.createGain();
-      oscillator.type = 'sine';
-      oscillator.frequency.value = frequency;
-      voice.gain.value = index === 0 ? .32 : .2;
-      oscillator.connect(voice);
-      voice.connect(musicMaster);
-      oscillator.start();
-    });
+function updateTrackSelection(index, autoplay = false) {
+  currentTrack = (index + tracks.length) % tracks.length;
+  const track = tracks[currentTrack];
+  document.querySelector('#playingTitle').textContent = track.title;
+  document.querySelector('#playingArtist').textContent = track.artist;
+  document.querySelector('#openStream').href = track.url;
+  if (playerReady) player.getIframe().title = `Official music video: ${track.title}`;
+  document.querySelectorAll('.track-card').forEach((card, cardIndex) => {
+    card.classList.toggle('selected', cardIndex === currentTrack);
+    card.setAttribute('aria-pressed', String(cardIndex === currentTrack));
+  });
+  document.querySelector('#playerStatus').textContent = playerReady ? 'Ready to play' : 'Connecting to YouTube…';
+  if (playerReady) {
+    if (autoplay) player.loadVideoById(track.id);
+    else player.cueVideoById(track.id);
   }
-  if (audioContext.state === 'suspended') audioContext.resume();
-  return true;
 }
 
-musicToggle.addEventListener('click', () => {
-  const isPlaying = musicToggle.getAttribute('aria-pressed') === 'true';
-  if (!createMusic()) {
-    musicToggle.setAttribute('aria-label', 'Background music is unavailable in this browser');
-    return;
-  }
-  const shouldPlay = !isPlaying;
-  musicMaster.gain.cancelScheduledValues(audioContext.currentTime);
-  musicMaster.gain.setTargetAtTime(shouldPlay ? .045 : 0, audioContext.currentTime, shouldPlay ? 1.1 : .25);
-  musicToggle.setAttribute('aria-pressed', String(shouldPlay));
-  musicToggle.setAttribute('aria-label', shouldPlay ? 'Mute background music' : 'Enable background music');
-  musicToggle.setAttribute('title', shouldPlay ? 'Mute background music' : 'Enable background music');
-  musicToggle.textContent = shouldPlay ? '♫' : '♩';
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('youtubePlayer', {
+    width: '100%', height: '100%', videoId: tracks[0].id,
+    playerVars: { playsinline: 1, rel: 0, controls: 1, autoplay: 0 },
+    events: {
+      onReady: () => {
+        playerReady = true;
+        player.cueVideoById(tracks[0].id);
+        player.getIframe().title = `Official music video: ${tracks[0].title}`;
+        updateTrackSelection(currentTrack, false);
+      },
+      onStateChange: (event) => {
+        playbackState = event.data;
+        const playing = event.data === YT.PlayerState.PLAYING;
+        document.querySelector('#visualizer').classList.toggle('is-playing', playing);
+        document.querySelector('#visualizer').setAttribute('aria-label', playing ? 'Visualizer active while the song plays' : 'Visualizer is idle');
+        document.querySelector('#playerStatus').textContent = playing ? 'Playing' : event.data === YT.PlayerState.PAUSED ? 'Paused' : event.data === YT.PlayerState.ENDED ? 'Finished' : 'Ready to play';
+        document.querySelector('#playTrack').textContent = playing ? 'Ⅱ' : '▶';
+        document.querySelector('#playTrack').setAttribute('aria-label', playing ? 'Pause selected song' : 'Play selected song');
+      }
+    }
+  });
+}
+window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+document.querySelectorAll('.track-card').forEach((card) => card.addEventListener('click', () => updateTrackSelection(Number(card.dataset.track), playerReady && playbackState === YT.PlayerState.PLAYING)));
+document.querySelector('#playTrack').addEventListener('click', () => {
+  if (!playerReady) { document.querySelector('#playerStatus').textContent = 'Use “Watch on YouTube” to listen'; return; }
+  if (playbackState === YT.PlayerState.PLAYING) player.pauseVideo();
+  else player.playVideo();
 });
+document.querySelector('#previousTrack').addEventListener('click', () => updateTrackSelection(currentTrack - 1, playerReady && playbackState === YT.PlayerState.PLAYING));
+document.querySelector('#nextTrack').addEventListener('click', () => updateTrackSelection(currentTrack + 1, playerReady && playbackState === YT.PlayerState.PLAYING));
+window.setTimeout(() => {
+  if (!playerReady) document.querySelector('#playerStatus').textContent = 'Use “Watch on YouTube” to listen';
+}, 9000);
 
 document.addEventListener('keydown', (event) => {
   if (!photoViewer.hidden) {
