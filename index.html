@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#f9edf1">
-  <meta name="description" content="A little six-page love letter for Soobin, made with love by a MOA.">
+  <meta name="description" content="A little seven-page love letter for Soobin, made with love by a MOA.">
   <title>A Little Letterbook for Soobin ♡</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,11 +18,12 @@
     <div class="floating-hearts" id="floatingHearts" aria-hidden="true"></div>
     <header class="book-chrome">
       <span class="book-mark">a little letterbook <b>♡</b></span>
-      <span class="page-count" id="pageCount">01 <i></i> 06</span>
+      <span class="page-count" id="pageCount">01 <i></i> 07</span>
+      <button class="music-toggle" id="musicToggle" type="button" aria-label="Enable background music" aria-pressed="false" title="Enable background music">♫</button>
     </header>
 
     <div class="book-stage" id="bookStage" aria-live="polite">
-      <section class="book-page envelope-page active" id="page-1" aria-label="The Envelope">
+      <section class="book-page envelope-page active" id="page-1" aria-label="The Sealed Envelope">
         <div class="cover-copy">
           <p class="tiny-heading">sealed with a little stardust</p>
           <h1>A little something<br>for you <span>♡</span></h1>
@@ -32,107 +33,84 @@
           <div class="envelope-shadow"></div>
           <div class="envelope" id="envelope" aria-hidden="true">
             <div class="letter-slip"><span>for soobin</span><b>♡</b></div>
-            <div class="envelope-back"></div>
-            <div class="envelope-front"></div>
-            <div class="envelope-flap"></div>
-            <div class="wax-seal">♡</div>
+            <div class="envelope-back"></div><div class="envelope-front"></div><div class="envelope-flap"></div><div class="wax-seal">♡</div>
           </div>
         </div>
-        <button class="primary-button open-button" id="openLetter">Open Letter <span>↗</span></button>
+        <button class="primary-button open-button" id="openLetter" type="button">Open My Letter <span>↗</span></button>
         <p class="cover-footnote">take your time — this is yours to keep</p>
-        <span class="cover-flower flower-left">✿</span><span class="cover-flower flower-right">✧</span>
+        <span class="cover-flower flower-left" aria-hidden="true">✿</span><span class="cover-flower flower-right" aria-hidden="true">✧</span>
       </section>
 
       <section class="book-page paper-page" id="page-2" aria-label="The Beginning" aria-hidden="true" hidden>
-        <div class="paper-sheet">
-          <div class="paper-frame"></div><span class="paper-flower flower-top">❀</span><span class="paper-sparkle sparkle-side">✧</span>
-          <div class="paper-copy">
-            <p class="page-kicker">page one · the beginning</p>
-            <h2>Dear <em>Soobin,</em></h2>
-            <div class="handwriting">
-              <p>I hope this finds you in a soft, unhurried moment, with a warm drink nearby and nowhere you need to be for just a little while.</p>
-              <p>I made this tiny letterbook to leave a little warmth with you. Think of each page as a small pressed flower: a gentle thing to find on an ordinary day.</p>
-              <p>There is no need to read quickly. Turn the pages whenever you're ready. Every word was written with care, and with a grateful heart.</p>
-            </div>
+        <div class="paper-sheet"><div class="paper-frame"></div><span class="paper-flower flower-top" aria-hidden="true">❀</span><span class="paper-sparkle sparkle-side" aria-hidden="true">✧</span>
+          <div class="paper-copy"><p class="page-kicker">page one · the beginning</p><h2>Dear <em>Soobin,</em></h2>
+            <div class="handwriting"><p>I hope this finds you in a soft, unhurried moment, with a warm drink nearby and nowhere you need to be for just a little while.</p><p>I made this tiny letterbook to leave a little warmth with you. Think of each page as a small pressed flower: a gentle thing to find on an ordinary day.</p><p>There is no need to read quickly. Turn the pages whenever you're ready. Every word was written with care, and with a grateful heart.</p></div>
             <div class="letter-signature"><span>with a little love,</span><b>a MOA ♡</b></div>
           </div>
         </div>
-        <div class="page-controls"><button class="quiet-button" data-prev>← Previous Page</button><button class="next-button" data-next>Turn Page <span>→</span></button></div>
+        <div class="page-controls"><button class="quiet-button" type="button" data-prev>← Previous Page</button><button class="next-button" type="button" data-next>Next Page <span>→</span></button></div>
       </section>
 
-      <section class="book-page paper-page" id="page-3" aria-label="My Feelings" aria-hidden="true" hidden>
-        <div class="paper-sheet paper-rose">
-          <div class="paper-frame"></div><span class="paper-flower flower-top">✿</span><span class="paper-sparkle sparkle-side">♡</span>
-          <div class="paper-copy">
-            <p class="page-kicker">page two · my feelings</p>
-            <h2>A little piece<br>of <em>sunshine</em></h2>
-            <div class="handwriting">
-              <p>You may never know how much happiness your smile brings. It has a lovely way of making a long day feel lighter, like someone opened the curtains and let morning in.</p>
-              <p>In a world that can sometimes feel overwhelming, your presence feels like a little piece of sunshine. Your gentle words, your laughter, and the care you show the people around you make the world feel kinder.</p>
-              <p>Even from far away, you make someone's ordinary days a little more beautiful. I hope you feel a bit of that love coming back to you today.</p>
-            </div>
+      <section class="book-page paper-page" id="page-3" aria-label="What You Mean to Me" aria-hidden="true" hidden>
+        <div class="paper-sheet paper-rose"><div class="paper-frame"></div><span class="paper-flower flower-top" aria-hidden="true">✿</span><span class="paper-sparkle sparkle-side" aria-hidden="true">♡</span>
+          <div class="paper-copy"><p class="page-kicker">page two · what you mean to me</p><h2>A little piece<br>of <em>sunshine</em></h2>
+            <div class="handwriting"><p>You may never know how much happiness your smile brings. It has a lovely way of making a long day feel lighter, like someone opened the curtains and let morning in.</p><p>In a world that can sometimes feel overwhelming, your presence feels like a little piece of sunshine. Your gentle words, your laughter, and the care you show the people around you make the world feel kinder.</p><p>Even from far away, you make someone's ordinary days a little more beautiful. I hope you feel a bit of that love coming back to you today.</p></div>
             <div class="letter-signature"><span>kept close, always</span><b>♡</b></div>
           </div>
         </div>
-        <div class="page-controls"><button class="quiet-button" data-prev>← Previous Page</button><button class="next-button" data-next>Turn Page <span>→</span></button></div>
+        <div class="page-controls"><button class="quiet-button" type="button" data-prev>← Previous Page</button><button class="next-button" type="button" data-next>Next Page <span>→</span></button></div>
       </section>
 
-      <section class="book-page paper-page" id="page-4" aria-label="Things I Adore" aria-hidden="true" hidden>
-        <div class="paper-sheet paper-blue">
-          <div class="paper-frame"></div><span class="paper-flower flower-top">❀</span><span class="paper-sparkle sparkle-side">✧</span>
-          <div class="paper-copy reasons-copy">
-            <p class="page-kicker">page three · things i adore</p>
-            <h2>Little reasons,<br><em>endless love</em></h2>
-            <div class="adore-list">
-              <p><span>♡</span> Your beautiful, day-brightening smile</p>
-              <p><span>✿</span> Your gentle heart and thoughtful ways</p>
-              <p><span>♫</span> Your comforting voice and adorable laugh</p>
-              <p><span>✧</span> The kindness you bring to your leadership</p>
-              <p><span>☁</span> The happiness you give to MOA</p>
-            </div>
-            <p class="small-note">And a thousand little things I couldn't fit on one page.</p>
+      <section class="book-page photo-only-page" id="page-4" aria-label="Photo album" aria-hidden="true" hidden>
+        <div class="photo-album" id="photoAlbum">
+          <span class="album-decoration album-flower flower-a" aria-hidden="true">✿</span><span class="album-decoration album-star star-a" aria-hidden="true">✧</span><span class="album-decoration album-heart heart-a" aria-hidden="true">♡</span><span class="album-decoration album-flower flower-b" aria-hidden="true">❀</span>
+          <button class="photo-card photo-one" type="button" data-photo="0" aria-label="Enlarge photo"><img src="assets/soobin-portrait.png" alt="Soobin in a cream jacket"></button>
+          <button class="photo-card photo-two" type="button" data-photo="1" aria-label="Enlarge photo"><img src="assets/soobin-heart.png" alt="Soobin making a heart with his hands"></button>
+          <button class="photo-card photo-three" type="button" data-photo="2" aria-label="Enlarge photo"><img src="assets/soobin-bunny.png" alt="Soobin smiling in pink bunny earmuffs"></button>
+          <span class="photo-tape tape-one" aria-hidden="true"></span><span class="photo-tape tape-two" aria-hidden="true"></span>
+        </div>
+        <div class="page-controls photo-controls"><button class="photo-arrow" type="button" data-prev aria-label="Previous page"><span aria-hidden="true">←</span></button><button class="photo-arrow" type="button" data-next aria-label="Next page"><span aria-hidden="true">→</span></button></div>
+      </section>
+
+      <section class="book-page paper-page" id="page-5" aria-label="Things I Adore About You" aria-hidden="true" hidden>
+        <div class="paper-sheet paper-blue"><div class="paper-frame"></div><span class="paper-flower flower-top" aria-hidden="true">❀</span><span class="paper-sparkle sparkle-side" aria-hidden="true">✧</span>
+          <div class="paper-copy reasons-copy"><p class="page-kicker">page four · things i adore</p><h2>Little reasons,<br><em>endless love</em></h2>
+            <div class="handwriting adore-letter"><p>I adore your beautiful smile, the one that brightens a room before you even say a word.</p><p>I adore your gentle personality, your comforting presence, and the thoughtful way you make people feel cared for.</p><p>I adore how hard you work and how sincerely you follow what you love. I adore your adorable little moments that make MOA smile without even trying.</p><p>Most of all, I adore the happiness you bring into so many lives, simply by being you.</p></div>
             <div class="letter-signature"><span>every little thing matters</span><b>♡</b></div>
           </div>
         </div>
-        <div class="page-controls"><button class="quiet-button" data-prev>← Previous Page</button><button class="next-button" data-next>Turn Page <span>→</span></button></div>
+        <div class="page-controls"><button class="quiet-button" type="button" data-prev>← Previous Page</button><button class="next-button" type="button" data-next>Next Page <span>→</span></button></div>
       </section>
 
-      <section class="book-page paper-page" id="page-5" aria-label="A Little Promise" aria-hidden="true" hidden>
-        <div class="paper-sheet paper-lilac">
-          <div class="paper-frame"></div><span class="paper-flower flower-top">✿</span><span class="paper-sparkle sparkle-side">✧</span>
-          <div class="paper-copy">
-            <p class="page-kicker">page four · a little promise</p>
-            <h2>Please remember<br><em>this</em></h2>
-            <div class="handwriting">
-              <p>You do not have to be perfect or bright every day to be cherished. You are already more than enough, exactly as you are — in the quiet moments, the tired moments, and every moment in between.</p>
-              <p>I hope you give yourself the same patience and warmth you so freely offer everyone else. Rest when you need to. Keep a little softness for yourself.</p>
-              <p>And when life feels heavy, may you remember there are people cheering for you sincerely, from wherever they are. Your happiness matters, too.</p>
-            </div>
+      <section class="book-page paper-page" id="page-6" aria-label="A Little Promise" aria-hidden="true" hidden>
+        <div class="paper-sheet paper-lilac"><div class="paper-frame"></div><span class="paper-flower flower-top" aria-hidden="true">✿</span><span class="paper-sparkle sparkle-side" aria-hidden="true">✧</span>
+          <div class="paper-copy"><p class="page-kicker">page five · a little promise</p><h2>Please remember<br><em>this</em></h2>
+            <div class="handwriting"><p>You do not have to be perfect or bright every day to be cherished. You are already more than enough, exactly as you are — in the quiet moments, the tired moments, and every moment in between.</p><p>I hope you give yourself the same patience and warmth you so freely offer everyone else. Rest when you need to. Keep a little softness for yourself.</p><p>And when life feels heavy, may you remember there are people cheering for you sincerely, from wherever they are. Your happiness matters, too.</p></div>
             <div class="letter-signature"><span>I'll keep cheering for you</span><b>a little MOA ♡</b></div>
           </div>
         </div>
-        <div class="page-controls"><button class="quiet-button" data-prev>← Previous Page</button><button class="next-button" data-next>Turn Page <span>→</span></button></div>
+        <div class="page-controls"><button class="quiet-button" type="button" data-prev>← Previous Page</button><button class="next-button" type="button" data-next>Next Page <span>→</span></button></div>
       </section>
 
-      <section class="book-page paper-page final-page" id="page-6" aria-label="The Final Letter" aria-hidden="true" hidden>
-        <div class="paper-sheet paper-final">
-          <div class="paper-frame"></div><span class="paper-flower flower-top">❀</span><span class="paper-sparkle sparkle-side">♡</span>
-          <div class="paper-copy final-copy">
-            <p class="page-kicker">page five · until we meet again</p>
-            <h2>Dear <em>Soobin,</em></h2>
-            <div class="handwriting">
-              <p>If this little letterbook could give you anything, I hope it gives you a reminder of how loved and appreciated you are.</p>
-              <p>No matter how far away you are, you will always have a special place in my heart.</p>
-              <p>Keep smiling, keep shining, and please always take care of yourself. Thank you for being you.</p>
-            </div>
-            <div class="final-signature"><span>With love,</span><strong>your MOA ♡</strong></div>
+      <section class="book-page paper-page final-page" id="page-7" aria-label="Until We Meet Again" aria-hidden="true" hidden>
+        <div class="paper-sheet paper-final"><div class="paper-frame"></div><span class="paper-flower flower-top" aria-hidden="true">❀</span><span class="paper-sparkle sparkle-side" aria-hidden="true">♡</span>
+          <div class="paper-copy final-copy"><p class="page-kicker">page six · until we meet again</p><h2>Dear <em>Soobin,</em></h2>
+            <div class="handwriting"><p>Even if you never read these words, I hope the universe knows how much happiness you bring into my life.</p><p>Keep smiling, keep shining, and always take care of yourself.</p></div>
+            <div class="final-signature"><span>With endless love,</span><strong>Your MOA ♡</strong></div>
           </div>
           <div class="closing-sparkles" aria-hidden="true"><i>✧</i><i>♡</i><i>✦</i><i>❀</i><i>✧</i></div>
         </div>
-        <div class="page-controls"><button class="quiet-button" data-prev>← Previous Page</button><button class="next-button read-again" id="readAgain">Read Again <span>↺</span></button></div>
+        <div class="page-controls"><button class="quiet-button" type="button" data-prev>← Previous Page</button><button class="next-button read-again" id="readAgain" type="button">Read My Letter Again <span>↺</span></button></div>
       </section>
     </div>
     <footer class="book-footer">a small love, sent across the stars <span>✧</span></footer>
+
+    <div class="photo-viewer" id="photoViewer" aria-hidden="true" hidden>
+      <button class="viewer-close" id="viewerClose" type="button" aria-label="Close enlarged photo">×</button>
+      <button class="viewer-arrow viewer-prev" id="viewerPrev" type="button" aria-label="Previous photo">‹</button>
+      <img id="viewerImage" alt="">
+      <button class="viewer-arrow viewer-next" id="viewerNext" type="button" aria-label="Next photo">›</button>
+    </div>
   </main>
   <script src="script.js"></script>
 </body>
